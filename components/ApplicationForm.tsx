@@ -21,11 +21,14 @@ const ApplicationForm: React.FC = () => {
   const [isQualified, setIsQualified] = useState(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
+    // Safe check for type and checked property
+    const isCheckbox = (e.target as HTMLInputElement).type === 'checkbox';
+    const finalValue = isCheckbox ? (e.target as HTMLInputElement).checked : value;
     
     setFormData(prev => ({
         ...prev,
-        [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+        [name]: finalValue
     }));
 
     if (name === 'lead_preference') {
