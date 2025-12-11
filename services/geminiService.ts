@@ -1,7 +1,14 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-// Initialize the client securely
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization to prevent app crash on load if env var is missing
+const getAiClient = () => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    console.warn("API Key is missing. AI features will not work.");
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export interface HookResult {
   headline: string;
@@ -16,6 +23,9 @@ export interface RoastResult {
 }
 
 export const generateHooks = async (niche: string, goal: string): Promise<HookResult[]> => {
+  const ai = getAiClient();
+  if (!ai) throw new Error("API configuration missing");
+
   const prompt = `You are a world-class financial marketing copywriter for ultra-high-net-worth individuals.
   
   Target Niche: "${niche}"
@@ -58,6 +68,9 @@ export const generateHooks = async (niche: string, goal: string): Promise<HookRe
 };
 
 export const roastPositioning = async (currentPitch: string): Promise<RoastResult> => {
+  const ai = getAiClient();
+  if (!ai) throw new Error("API configuration missing");
+
   const prompt = `Act as a brutal, high-end brand consultant for a wealth management firm. 
   Analyze this current value proposition/headline: "${currentPitch}".
   
