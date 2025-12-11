@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator } from 'lucide-react';
 
 const CostOfInaction: React.FC = () => {
   const [currentAum, setCurrentAum] = useState<string>('50');
@@ -35,7 +34,7 @@ const CostOfInaction: React.FC = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <div className="flex items-center space-x-2 mb-6">
-                        <Calculator className="text-wealth-gold w-5 h-5" />
+                        <svg className="text-wealth-gold w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><line x1="8" x2="8" y1="14" y2="14"/><line x1="12" x2="12" y1="14" y2="14"/><line x1="8" x2="8" y1="10" y2="10"/><line x1="16" x2="16" y1="10" y2="10"/><line x1="12" x2="12" y1="10" y2="10"/><line x1="12" x2="12" y1="18" y2="18"/><line x1="8" x2="8" y1="18" y2="18"/><line x1="16" x2="16" y1="18" y2="18"/></svg>
                         <span className="text-xs font-bold tracking-[0.2em] text-wealth-gold uppercase">
                             Revenue Capacity Model
                         </span>

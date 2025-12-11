@@ -1,20 +1,19 @@
 import React from 'react';
-import { ShieldAlert, Filter, Building2 } from 'lucide-react';
 
 const Philosophy: React.FC = () => {
   const cards = [
     {
-      icon: <Building2 className="w-8 h-8" />,
+      icon: <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>,
       title: "Asset-Class Creative",
       desc: "We produce broadcast-quality media assets that position your firm alongside hedge funds and private banks, not local insurance salesmen."
     },
     {
-      icon: <Filter className="w-8 h-8" />,
+      icon: <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>,
       title: "The Sovereign Filter",
       desc: "Our aesthetic is designed to repel 'tire kickers' and exclusively attract high-net-worth individuals who value premium service."
     },
     {
-      icon: <ShieldAlert className="w-8 h-8" />,
+      icon: <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>,
       title: "Institutional Authority",
       desc: "We leverage the same visual psychology used by global financial institutions to build instant trust before you ever speak to the prospect."
     }
