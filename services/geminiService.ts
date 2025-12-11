@@ -58,10 +58,10 @@ export const generateHooks = async (niche: string, goal: string): Promise<HookRe
       }
     });
 
-    if (response.text) {
-      return JSON.parse(response.text) as HookResult[];
+    if (!response.text) {
+      throw new Error("Failed to generate hooks: Empty response");
     }
-    return [];
+    return JSON.parse(response.text) as HookResult[];
   } catch (error) {
     console.error("Gemini API Error:", error);
     throw error;
