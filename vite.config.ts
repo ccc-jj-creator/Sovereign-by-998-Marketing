@@ -8,8 +8,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // Safely access API_KEY from either local .env or Vercel's environment
-      'process.env.API_KEY': JSON.stringify(env.API_KEY || (process.env as any).API_KEY)
+      // Expose the API key (from .env or Vercel system vars) as process.env.API_KEY to match Google GenAI guidelines
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || process.env.API_KEY)
     }
   }
 })
