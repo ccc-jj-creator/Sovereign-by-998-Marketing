@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const ApplicationForm: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -22,7 +21,6 @@ const ApplicationForm: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    // Safe check for type and checked property
     const isCheckbox = (e.target as HTMLInputElement).type === 'checkbox';
     const finalValue = isCheckbox ? (e.target as HTMLInputElement).checked : value;
     
@@ -48,27 +46,20 @@ const ApplicationForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25664223/ufar6c4/';
-
     try {
         await fetch(webhookUrl, {
             method: 'POST',
-            mode: 'no-cors', // Required for Zapier webhooks to work from the browser
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
         });
     } catch (error) {
         console.error("Webhook failed", error);
     }
-    
-    // Move to calendar step regardless of webhook status to keep UX smooth
     setStep(2);
   };
 
-  // Helper for ROI calculation based on budget
   const getRoi = (budget: string) => {
       switch(budget) {
           case '$3,000-$7,000': return { clients: '1-3', aum: '$1M-$3M+' };
@@ -95,10 +86,10 @@ const ApplicationForm: React.FC = () => {
         <p className="text-gray-400 text-lg mb-4 max-w-xl mx-auto">
           We are selecting 5 Partners to receive our Enterprise-Grade Media Production & Lead Systems at cost, in exchange for a documented case study.
         </p>
-        <p className="text-sm text-white/80 mt-4 mb-12 font-medium bg-wealth-charcoal inline-flex items-center gap-2 px-4 py-2 border border-white/10">
-          <CheckCircle2 size={16} className="text-wealth-gold"/>
+        <div className="text-sm text-white/80 mt-4 mb-12 font-medium bg-wealth-charcoal inline-flex items-center gap-2 px-4 py-2 border border-white/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-wealth-gold"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           The 21-Day Launch Guarantee: We build your entire system in 21 days or less, or your setup fee is refunded.
-        </p>
+        </div>
       </div>
 
       <div className="max-w-xl mx-auto relative z-20 text-left">
@@ -166,7 +157,7 @@ const ApplicationForm: React.FC = () => {
                  </div>
                  
                  {roi && (
-                     <div className="mt-4 bg-gradient-to-r from-wealth-charcoal to-black border border-white/10 p-4 animate-fade-in">
+                     <div className="mt-4 bg-gradient-to-r from-wealth-charcoal to-black border border-white/10 p-4">
                         <div className="flex justify-between items-center mb-2">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-wealth-gold">Projected Impact</span>
                         </div>
@@ -184,9 +175,9 @@ const ApplicationForm: React.FC = () => {
                  )}
 
                  {showBudgetWarning && (
-                     <div className="mt-4 bg-red-900/20 border border-red-900/50 p-6 animate-fade-in">
+                     <div className="mt-4 bg-red-900/20 border border-red-900/50 p-6">
                         <div className="flex gap-3 mb-4">
-                            <AlertCircle className="text-red-500 shrink-0" />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-500 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                             <p className="text-white text-sm">
                                 Our system generally requires a minimum media buy of <span className="text-wealth-gold font-bold">$3,000/mo</span> to generate qualified HNW leads. Is that feasible?
                             </p>
@@ -234,12 +225,14 @@ const ApplicationForm: React.FC = () => {
                 className="w-full py-5 text-sm font-semibold tracking-widest uppercase transition-all duration-300 bg-white text-black hover:bg-wealth-gold hover:text-white border border-transparent disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
                 {isQualified ? 'Check Availability' : 'Not Qualified'}
-                {isQualified && <ArrowRight size={16} />}
+                {isQualified && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                )}
             </button>
 
           </form>
         ) : (
-            <div className="animate-fade-in">
+            <div>
                 <div className="w-full bg-wealth-black border border-white/10 p-2 min-h-[600px]">
                      <iframe 
                         src={`https://api.leadconnectorhq.com/widget/booking/7Do59Uva5qszIlIfg6vb?first_name=${formData.first_name}&last_name=${formData.last_name}&email=${formData.email}&phone=${formData.phone}`} 

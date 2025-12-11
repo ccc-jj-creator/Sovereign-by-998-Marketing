@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 import { generateHooks, roastPositioning, HookResult, RoastResult } from '../services/geminiService';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 const AIAudit: React.FC = () => {
   const [niche, setNiche] = useState('');
@@ -12,12 +10,6 @@ const AIAudit: React.FC = () => {
   const [hookResults, setHookResults] = useState<HookResult[] | null>(null);
   const [roastResults, setRoastResults] = useState<RoastResult | null>(null);
   const [error, setError] = useState('');
-
-  // Mock data for the chart based on input (visual sugar)
-  const chartData = [
-    { name: 'Your Score', value: roastResults ? roastResults.score : 20, color: '#333' },
-    { name: 'Sovereign', value: 95, color: '#D4AF37' },
-  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,11 +28,14 @@ const AIAudit: React.FC = () => {
       setHookResults(hooks);
       setRoastResults(roast);
     } catch (err) {
-      setError('Analysis failed. Please try again.');
+      setError('Analysis failed. Please ensure API Key is valid and try again.');
     } finally {
       setLoading(false);
     }
   };
+
+  // Simple visual calculation for the chart
+  const userScore = roastResults ? roastResults.score : 20;
 
   return (
     <section id="audit" className="py-24 bg-wealth-charcoal relative overflow-hidden">
@@ -53,7 +48,7 @@ const AIAudit: React.FC = () => {
           {/* Input Side */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <Sparkles className="text-wealth-gold w-5 h-5" />
+              <svg className="text-wealth-gold w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 21h4"/><path d="M17 3h4"/></svg>
               <span className="text-xs font-bold tracking-[0.2em] text-wealth-gold uppercase">
                 AI Value Analysis
               </span>
@@ -112,8 +107,10 @@ const AIAudit: React.FC = () => {
                 disabled={loading}
                 className="w-full md:w-auto py-4 px-8 text-sm font-semibold tracking-widest uppercase transition-all duration-300 bg-white text-black hover:bg-wealth-gold hover:text-white border border-transparent flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {loading ? <Loader2 className="animate-spin" /> : 'Generate Authority Hooks'}
-                {!loading && <ArrowRight size={16} />}
+                {loading ? 'Analyzing...' : 'Generate Authority Hooks'}
+                {!loading && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                )}
               </button>
             </form>
           </div>
@@ -131,33 +128,58 @@ const AIAudit: React.FC = () => {
             {/* Error State */}
             {error && (
               <div className="text-center text-red-400 flex flex-col items-center gap-2">
-                <AlertCircle />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                 <p className="text-sm">{error}</p>
               </div>
             )}
 
             {/* Combined Results State */}
             {(hookResults || roastResults) && (
-              <div className="space-y-6 animate-fade-in w-full">
+              <div className="space-y-8 w-full">
                 
                 {/* ROAST SECTION */}
                 {roastResults && (
-                    <div className="border-b border-white/10 pb-6 mb-6">
+                    <div className="border-b border-white/10 pb-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-sm font-bold tracking-widest text-white uppercase">Positioning Audit</h3>
                             <div className={`px-3 py-1 text-xs font-bold border ${roastResults.score > 50 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'}`}>
                                 SCORE: {roastResults.score}/100
                             </div>
                         </div>
-                        <p className="text-white text-md font-serif italic border-l-2 border-red-500/50 pl-4 py-2 bg-red-900/10 mb-4">
-                            "{roastResults.critique}"
-                        </p>
+                        <div className="bg-red-900/10 border-l-2 border-red-500/50 p-4 mb-4">
+                            <p className="text-white text-md font-serif italic">"{roastResults.critique}"</p>
+                        </div>
                         <p className="text-xs text-wealth-gold uppercase tracking-widest mb-2">Sovereign Rewrite</p>
-                        <p className="text-white text-md font-medium border-l-2 border-wealth-gold pl-4 py-2 bg-wealth-gold/5">
-                             "{roastResults.rewrite}"
-                        </p>
+                        <div className="bg-wealth-gold/5 border-l-2 border-wealth-gold p-4">
+                             <p className="text-white text-md font-medium">"{roastResults.rewrite}"</p>
+                        </div>
                     </div>
                 )}
+
+                {/* VISUAL CHART (CSS BASED) */}
+                <div className="py-2">
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Luxury Perception Gap</p>
+                    <div className="space-y-4">
+                        <div>
+                            <div className="flex justify-between text-xs text-gray-400 mb-1">
+                                <span>Your Current Positioning</span>
+                                <span>{userScore}/100</span>
+                            </div>
+                            <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div className="bg-gray-500 h-full transition-all duration-1000" style={{ width: `${userScore}%` }}></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex justify-between text-xs text-gray-400 mb-1">
+                                <span className="text-wealth-gold">Sovereign Standard</span>
+                                <span className="text-wealth-gold">98/100</span>
+                            </div>
+                            <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                                <div className="bg-wealth-gold h-full transition-all duration-1000" style={{ width: '98%' }}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* HOOKS SECTION */}
                 {hookResults && (
@@ -168,37 +190,21 @@ const AIAudit: React.FC = () => {
                             </h3>
                          </div>
                         {hookResults.map((hook, idx) => (
-                            <div key={idx} className="group border-l-2 border-transparent hover:border-wealth-gold pl-4 transition-all duration-300">
-                            <h4 className="text-lg text-white font-medium mb-1 group-hover:text-wealth-gold transition-colors">"{hook.headline}"</h4>
-                            <p className="text-sm text-gray-400 mb-2">{hook.subheadline}</p>
-                            <p className="text-xs text-gray-600 italic">Strategy: {hook.rationale}</p>
+                            <div key={idx} className="group border-l-2 border-white/10 hover:border-wealth-gold pl-4 transition-all duration-300 cursor-default">
+                                <h4 className="text-lg text-white font-medium mb-1 group-hover:text-wealth-gold transition-colors">"{hook.headline}"</h4>
+                                <p className="text-sm text-gray-400 mb-2">{hook.subheadline}</p>
+                                <p className="text-xs text-gray-600 italic">Strategy: {hook.rationale}</p>
                             </div>
                         ))}
                     </div>
                 )}
-
-                <div className="h-40 mt-8 border-t border-white/10 pt-6">
-                   <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Luxury Perception Gap</p>
-                   <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={chartData} layout="vertical" margin={{ left: -20 }}>
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="name" type="category" width={80} tick={{fill: '#666', fontSize: 10}} axisLine={false} tickLine={false} />
-                        <Tooltip cursor={{fill: 'transparent'}} contentStyle={{backgroundColor: '#1a1a1a', borderColor: '#333', color: '#fff'}} />
-                        <Bar dataKey="value" barSize={12} radius={[0, 4, 4, 0]}>
-                            {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                        </Bar>
-                      </BarChart>
-                   </ResponsiveContainer>
-                </div>
               </div>
             )}
             
             {/* Loading Overlay */}
             {loading && (
                 <div className="absolute inset-0 bg-wealth-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-20">
-                    <Loader2 className="w-8 h-8 text-wealth-gold animate-spin mb-4" />
+                    <div className="w-8 h-8 border-2 border-wealth-gold border-t-transparent rounded-full animate-spin mb-4"></div>
                     <p className="text-xs text-wealth-gold uppercase tracking-widest">Running Sovereign Analysis...</p>
                 </div>
             )}
