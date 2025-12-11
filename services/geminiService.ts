@@ -2,6 +2,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 
 // Lazy initialization to prevent app crash on load if env var is missing
 const getAiClient = () => {
+  // Fixed: Use process.env.API_KEY to align with Google GenAI SDK guidelines and resolve ImportMeta error
   const apiKey = process.env.API_KEY;
   if (!apiKey) {
     console.warn("API Key is missing. AI features will not work.");
