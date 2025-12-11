@@ -1,8 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 // Initialize the client securely
-const apiKey = process.env.API_KEY || ''; 
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export interface HookResult {
   headline: string;
@@ -16,16 +15,7 @@ export interface RoastResult {
   rewrite: string;
 }
 
-const checkApiKey = () => {
-  if (!apiKey) {
-    console.error("API Key is missing");
-    throw new Error("API Key is missing. Please configure it in the environment.");
-  }
-};
-
 export const generateHooks = async (niche: string, goal: string): Promise<HookResult[]> => {
-  checkApiKey();
-
   const prompt = `You are a world-class financial marketing copywriter for ultra-high-net-worth individuals.
   
   Target Niche: "${niche}"
@@ -68,8 +58,6 @@ export const generateHooks = async (niche: string, goal: string): Promise<HookRe
 };
 
 export const roastPositioning = async (currentPitch: string): Promise<RoastResult> => {
-  checkApiKey();
-
   const prompt = `Act as a brutal, high-end brand consultant for a wealth management firm. 
   Analyze this current value proposition/headline: "${currentPitch}".
   
