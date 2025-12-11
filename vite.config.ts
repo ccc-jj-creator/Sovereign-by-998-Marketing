@@ -11,10 +11,9 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // This injects the environment variable into the build as a string
-      'process.env.API_KEY': JSON.stringify(env.API_KEY),
-      // Fallback for libraries that might access process.env generically
-      'process.env': JSON.stringify({}),
+      // Only define the specific key to avoid conflicts. 
+      // Do NOT define 'process.env' as an object here, as it shadows the specific keys.
+      'process.env.API_KEY': JSON.stringify(env.API_KEY)
     }
   }
 })
