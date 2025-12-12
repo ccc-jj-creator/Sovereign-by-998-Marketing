@@ -2,8 +2,8 @@ import { GoogleGenAI, Type } from "@google/genai";
 
 // Lazy initialization to prevent app crash on load if env var is missing
 const getAiClient = () => {
-  // Use process.env.API_KEY as per coding guidelines
-  const apiKey = process.env.API_KEY;
+  // Use Vite's import.meta.env for client-side environment variables
+  const apiKey = import.meta.env.VITE_API_KEY;
   if (!apiKey) {
     console.warn("API Key is missing. AI features will not work.");
     return null;
