@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import { generateHooks, roastPositioning, HookResult, RoastResult } from '../services/geminiService';
+import { useTypeformModal } from './TypeformModal';
 
 const AIAudit: React.FC = () => {
   const [niche, setNiche] = useState('');
   const [goal, setGoal] = useState('');
   const [pitch, setPitch] = useState('');
-  
+
   const [loading, setLoading] = useState(false);
   const [hookResults, setHookResults] = useState<HookResult[] | null>(null);
   const [roastResults, setRoastResults] = useState<RoastResult | null>(null);
   const [error, setError] = useState('');
 
+  const { openModal } = useTypeformModal();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!niche || !goal || !pitch) return;
-    
+
     setLoading(true);
     setError('');
     setHookResults(null);
     setRoastResults(null);
-    
+
     try {
       const [hooks, roast] = await Promise.all([
         generateHooks(niche, goal),
@@ -44,7 +47,7 @@ const AIAudit: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          
+
           {/* Input Side */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
@@ -57,8 +60,8 @@ const AIAudit: React.FC = () => {
               Does your offer <span className="italic text-gray-500">resonate</span> with the 1%?
             </h2>
             <p className="text-gray-400 mb-8 leading-relaxed">
-              Most advisors fail because they sound like everyone else. 
-              Use our proprietary AI model (powered by Gemini) to audit your niche and generate 
+              Most advisors fail because they sound like everyone else.
+              Use our proprietary AI model (powered by Gemini) to audit your niche and generate
               high-net-worth messaging instantly.
             </p>
 
@@ -67,8 +70,8 @@ const AIAudit: React.FC = () => {
                 <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">
                   Target Niche
                 </label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={niche}
                   onChange={(e) => setNiche(e.target.value)}
                   className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold focus:outline-none transition-colors placeholder-gray-700"
@@ -76,13 +79,13 @@ const AIAudit: React.FC = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">
                   AUM Growth Goal
                 </label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={goal}
                   onChange={(e) => setGoal(e.target.value)}
                   className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold focus:outline-none transition-colors placeholder-gray-700"
@@ -93,7 +96,7 @@ const AIAudit: React.FC = () => {
 
                <div>
                    <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">Current Headline / Value Proposition</label>
-                   <textarea 
+                   <textarea
                       value={pitch}
                       onChange={(e) => setPitch(e.target.value)}
                       className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold focus:outline-none transition-colors placeholder-gray-700 min-h-[100px]"
@@ -102,8 +105,8 @@ const AIAudit: React.FC = () => {
                    />
                 </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={loading}
                 className="w-full md:w-auto py-4 px-8 text-sm font-semibold tracking-widest uppercase transition-all duration-300 bg-white text-black hover:bg-wealth-gold hover:text-white border border-transparent flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
@@ -117,7 +120,7 @@ const AIAudit: React.FC = () => {
 
           {/* Results Side */}
           <div className="bg-wealth-black border border-white/5 p-8 min-h-[500px] flex flex-col justify-center relative">
-            
+
             {/* Idle State */}
             {!loading && !hookResults && !roastResults && !error && (
               <div className="text-center text-gray-600">
@@ -136,7 +139,7 @@ const AIAudit: React.FC = () => {
             {/* Combined Results State */}
             {(hookResults || roastResults) && (
               <div className="space-y-8 w-full">
-                
+
                 {/* ROAST SECTION */}
                 {roastResults && (
                     <div className="border-b border-white/10 pb-6">
@@ -198,9 +201,22 @@ const AIAudit: React.FC = () => {
                         ))}
                     </div>
                 )}
+
+                {/* CTA Button */}
+                <div className="pt-4 border-t border-white/10">
+                  <button
+                    onClick={() => openModal('AI Audit Tool')}
+                    className="w-full py-4 px-6 bg-wealth-gold text-black font-bold text-sm tracking-widest uppercase hover:bg-white transition-all flex items-center justify-center gap-2"
+                  >
+                    Get These Hooks Deployed
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             )}
-            
+
             {/* Loading Overlay */}
             {loading && (
                 <div className="absolute inset-0 bg-wealth-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-20">

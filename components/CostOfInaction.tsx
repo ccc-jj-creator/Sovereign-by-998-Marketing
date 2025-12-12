@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTypeformModal } from './TypeformModal';
 
 const CostOfInaction: React.FC = () => {
   const [currentAum, setCurrentAum] = useState<string>('50');
@@ -6,11 +7,13 @@ const CostOfInaction: React.FC = () => {
   const [fee, setFee] = useState<string>('1.0');
   const [gap, setGap] = useState<number>(0);
 
+  const { openModal } = useTypeformModal();
+
   useEffect(() => {
     const c = parseFloat(currentAum) || 0;
     const g = parseFloat(goalAum) || 0;
     const f = parseFloat(fee) || 0;
-    
+
     // Calculate Annual Revenue Gap
     // (Goal - Current) * (Fee / 100) * 1,000,000
     const calculatedGap = Math.max(0, (g - c) * 1000000 * (f / 100));
@@ -43,35 +46,35 @@ const CostOfInaction: React.FC = () => {
                         The Cost of <br/> <span className="text-gray-500">Stagnation.</span>
                     </h2>
                     <p className="text-gray-400 mb-8 leading-relaxed text-lg">
-                        In the wealth management industry, flat growth is not neutral—it is a compounding loss. 
+                        In the wealth management industry, flat growth is not neutral—it is a compounding loss.
                         Calculate the annual recurring revenue (ARR) capacity currently unrealized in your practice.
                     </p>
-                    
+
                     <div className="p-6 bg-wealth-charcoal border border-white/10 space-y-6">
                         <div>
                             <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">Current AUM ($ Millions)</label>
-                            <input 
-                                type="number" 
-                                value={currentAum} 
+                            <input
+                                type="number"
+                                value={currentAum}
                                 onChange={(e) => setCurrentAum(e.target.value)}
                                 className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold outline-none font-mono"
                             />
                         </div>
                         <div>
                             <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">Goal AUM ($ Millions)</label>
-                            <input 
-                                type="number" 
-                                value={goalAum} 
+                            <input
+                                type="number"
+                                value={goalAum}
                                 onChange={(e) => setGoalAum(e.target.value)}
                                 className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold outline-none font-mono"
                             />
                         </div>
                         <div>
                             <label className="block text-xs font-bold tracking-widest text-gray-500 uppercase mb-2">Avg. Advisory Fee (%)</label>
-                            <input 
-                                type="number" 
+                            <input
+                                type="number"
                                 step="0.1"
-                                value={fee} 
+                                value={fee}
                                 onChange={(e) => setFee(e.target.value)}
                                 className="w-full bg-wealth-black border border-white/10 p-4 text-white focus:border-wealth-gold outline-none font-mono"
                             />
@@ -85,9 +88,9 @@ const CostOfInaction: React.FC = () => {
                         {formatCurrency(gap)}
                     </div>
                     <p className="text-xs text-wealth-gold uppercase tracking-widest mb-8">Recurrent Annual Capacity</p>
-                    
+
                     <div className="w-full h-[1px] bg-white/10 mb-8"></div>
-                    
+
                     <div className="grid grid-cols-2 w-full gap-4 text-left">
                         <div>
                             <p className="text-xs text-gray-500 mb-1">Monthly Opportunity Cost</p>
@@ -98,9 +101,22 @@ const CostOfInaction: React.FC = () => {
                             <p className="text-xl text-white font-serif">{formatCurrency(gap * 3)}</p>
                         </div>
                     </div>
-                    
+
+                    {/* CTA Button */}
+                    {gap > 0 && (
+                      <button
+                        onClick={() => openModal('Revenue Calculator')}
+                        className="mt-8 w-full py-4 px-6 bg-wealth-gold text-black font-bold text-sm tracking-widest uppercase hover:bg-white transition-all flex items-center justify-center gap-2"
+                      >
+                        Close This Gap
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </button>
+                    )}
+
                     <p className="text-[10px] text-gray-600 mt-8 italic max-w-sm">
-                        *Figures are mathematical models based on your inputs and standard fee structures. 
+                        *Figures are mathematical models based on your inputs and standard fee structures.
                         They represent potential revenue capacity, not guaranteed returns.
                     </p>
                 </div>
