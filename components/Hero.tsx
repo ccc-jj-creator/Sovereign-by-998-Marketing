@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTypeformModal } from './TypeformModal';
 
-interface HeroProps {
-  onApplyClick: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
+const Hero: React.FC = () => {
   const [offsetY, setOffsetY] = useState(0);
+  const { openModal } = useTypeformModal();
 
   useEffect(() => {
     const handleScroll = () => setOffsetY(window.scrollY);
@@ -22,12 +20,12 @@ const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
 
   return (
     <header className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-wealth-black">
-      
+
       {/* --- SOVEREIGN DATA HORIZON BACKGROUND --- */}
       <div className="absolute inset-0 z-0 pointer-events-none bg-[#020202]">
-        
+
         {/* 1. The Perspective Grid */}
-        <div 
+        <div
             className="absolute inset-0 opacity-20"
             style={{
                 transform: 'perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px)',
@@ -66,12 +64,12 @@ const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
       {/* --- CONTENT LAYER --- */}
       <div className="relative z-30 max-w-7xl mx-auto px-6 w-full mt-12 md:mt-0">
         <div className="max-w-4xl mx-auto md:mx-0 text-center md:text-left">
-          
+
           <div className="inline-flex items-center space-x-3 mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
             <div className="h-[1px] w-12 bg-wealth-gold shadow-[0_0_15px_#D4AF37]"></div>
             <span className="text-wealth-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-shadow-gold">Sovereign Architecture</span>
           </div>
-          
+
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif font-medium leading-[0.9] tracking-tighter text-white mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
             WE SCALE <br />
             <span className="relative inline-block">
@@ -79,23 +77,23 @@ const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
                 <span className="absolute -inset-1 bg-wealth-gold/10 blur-xl -z-10"></span>
             </span>
           </h1>
-          
+
           <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
               <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mb-12 md:border-l-2 border-wealth-gold pl-6 mx-auto md:mx-0">
                 Stop chasing referrals. We install the <span className="text-white font-medium">Sovereign Client Acquisition System™</span> into your firm to predictably add <span className="text-wealth-gold">$10M-$50M in AUM</span> within 90 days.
               </p>
           </div>
-          
+
           <div className="flex flex-col md:flex-row gap-6 animate-fade-in opacity-0 justify-center md:justify-start" style={{ animationDelay: '0.7s' }}>
             <button
-              onClick={onApplyClick}
+              onClick={() => openModal('Hero CTA')}
               className="relative px-10 py-5 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all duration-300 ease-out shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
             >
               <span className="relative z-10">Book Strategy Session</span>
               <div className="absolute inset-0 bg-white group-hover:scale-105 transition-transform duration-300"></div>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => scrollTo('pedigree')}
               className="px-10 py-5 bg-transparent border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:border-wealth-gold/50 hover:bg-wealth-gold/5 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-3 group"
             >
@@ -105,7 +103,7 @@ const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
           </div>
         </div>
       </div>
-      
+
       <style>{`
         .text-shadow-gold {
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);

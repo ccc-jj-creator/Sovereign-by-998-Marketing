@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTypeformModal } from './TypeformModal';
 
-interface NavbarProps {
-  onApplyClick: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
+const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openModal } = useTypeformModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
             </button>
           ))}
           <button
-            onClick={onApplyClick}
+            onClick={() => openModal('Navbar Desktop')}
             className="px-6 py-2 border border-white/20 text-xs font-medium tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all uppercase"
           >
             Apply Now
@@ -73,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
             </button>
           ))}
           <button
-            onClick={() => { onApplyClick(); setIsMobileMenuOpen(false); }}
+            onClick={() => { openModal('Navbar Mobile'); setIsMobileMenuOpen(false); }}
             className="block text-center py-3 border border-white/20 text-sm font-medium tracking-widest text-white hover:bg-white hover:text-black transition-all uppercase"
           >
             Apply Now
