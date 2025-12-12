@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Philosophy from './components/Philosophy';
@@ -8,12 +8,18 @@ import PedigreeMap from './components/PedigreeMap';
 import LiveTicker from './components/LiveTicker';
 import ApplicationForm from './components/ApplicationForm';
 import Footer from './components/Footer';
+import FormModal from './components/FormModal';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="bg-wealth-black text-white min-h-screen font-sans pb-10">
-      <Navbar />
-      <Hero />
+      <Navbar onApplyClick={openModal} />
+      <Hero onApplyClick={openModal} />
       
       {/* Social Proof */}
       <section className="py-12 border-b border-white/5">
@@ -72,6 +78,9 @@ function App() {
       <ApplicationForm />
       <Footer />
       <LiveTicker />
+
+      {/* Form Modal */}
+      <FormModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onApplyClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onApplyClick }) => {
   const [offsetY, setOffsetY] = useState(0);
 
   useEffect(() => {
@@ -83,8 +87,8 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 animate-fade-in opacity-0 justify-center md:justify-start" style={{ animationDelay: '0.7s' }}>
-            <button 
-              onClick={() => scrollTo('contact')}
+            <button
+              onClick={onApplyClick}
               className="relative px-10 py-5 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all duration-300 ease-out shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
             >
               <span className="relative z-10">Book Strategy Session</span>

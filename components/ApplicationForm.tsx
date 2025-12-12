@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-const ApplicationForm: React.FC = () => {
+interface ApplicationFormProps {
+  isModal?: boolean;
+  onClose?: () => void;
+}
+
+const ApplicationForm: React.FC<ApplicationFormProps> = ({ isModal = false, onClose }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     // Step 1: Market Position
@@ -140,12 +145,12 @@ const ApplicationForm: React.FC = () => {
   );
 
   return (
-    <section id="contact" className="py-32 px-6 text-center">
-      <div className="max-w-3xl mx-auto mb-12">
+    <section id="contact" className={isModal ? "py-8 px-6 text-center" : "py-32 px-6 text-center"}>
+      <div className={isModal ? "max-w-3xl mx-auto mb-6" : "max-w-3xl mx-auto mb-12"}>
         <div className="inline-block bg-wealth-gold/10 border border-wealth-gold text-wealth-gold px-4 py-1 text-xs font-bold uppercase tracking-widest mb-6 animate-pulse-slow">
           Founding Partner Cohort: Open
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif mb-8 text-white">
+        <h2 className={isModal ? "text-3xl md:text-4xl font-serif mb-4 text-white" : "text-4xl md:text-6xl font-serif mb-8 text-white"}>
           Scale Your Practice. <br />
           <span className="text-gray-600">Reclaim Your Time.</span>
         </h2>
