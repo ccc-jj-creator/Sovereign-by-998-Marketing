@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-// Initialize the client securely
-const apiKey = process.env.API_KEY || ''; 
+// Initialize the client securely using Vite environment variable
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
 export interface HookResult {
