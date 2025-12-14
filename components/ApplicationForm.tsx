@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
 const ApplicationForm: React.FC = () => {
+  const [step, setStep] = useState(1);
+
   useEffect(() => {
     // Load the GHL form embed script
     const script = document.createElement('script');
@@ -9,9 +11,19 @@ const ApplicationForm: React.FC = () => {
     script.async = true;
     document.body.appendChild(script);
 
+    // Listen for form submission message from GHL iframe
+    const handleMessage = (event: MessageEvent) => {
+      // GHL forms send messages on submission
+      if (event.data && (event.data.type === 'form:submit' || event.data.formSubmitted)) {
+        setStep(2);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
     return () => {
-      // Cleanup script on unmount
       document.body.removeChild(script);
+      window.removeEventListener('message', handleMessage);
     };
   }, []);
 
@@ -35,23 +47,46 @@ const ApplicationForm: React.FC = () => {
       </div>
 
       <div className="max-w-xl mx-auto relative z-20">
-        <iframe
-          src="https://api.leadconnectorhq.com/widget/form/s79KnChAtYtbHnUR3DKN"
-          style={{width: '100%', height: '1119px', border: 'none', borderRadius: '3px'}}
-          id="inline-s79KnChAtYtbHnUR3DKN"
-          data-layout="{'id':'INLINE'}"
-          data-trigger-type="alwaysShow"
-          data-trigger-value=""
-          data-activation-type="alwaysActivated"
-          data-activation-value=""
-          data-deactivation-type="neverDeactivate"
-          data-deactivation-value=""
-          data-form-name="Highlevel"
-          data-height="1119"
-          data-layout-iframe-id="inline-s79KnChAtYtbHnUR3DKN"
-          data-form-id="s79KnChAtYtbHnUR3DKN"
-          title="Highlevel"
-        />
+        {step === 1 ? (
+          <>
+            <iframe
+              src="https://api.leadconnectorhq.com/widget/form/s79KnChAtYtbHnUR3DKN"
+              style={{width: '100%', height: '1119px', border: 'none', borderRadius: '3px'}}
+              id="inline-s79KnChAtYtbHnUR3DKN"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Highlevel"
+              data-height="1119"
+              data-layout-iframe-id="inline-s79KnChAtYtbHnUR3DKN"
+              data-form-id="s79KnChAtYtbHnUR3DKN"
+              title="Highlevel"
+            />
+            <button
+              onClick={() => setStep(2)}
+              className="mt-6 text-sm text-gray-500 hover:text-wealth-gold underline transition-colors"
+            >
+              Already submitted? Click here to schedule
+            </button>
+          </>
+        ) : (
+          <div className="animate-fade-in">
+            <div className="w-full bg-wealth-black border border-white/10 p-2 min-h-[600px]">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/booking/7Do59Uva5qszIlIfg6vb"
+                style={{width: '100%', border: 'none', overflow: 'hidden', height: '600px'}}
+                scrolling="no"
+                id="ghl-calendar-iframe"
+                title="Sovereign Calendar"
+              />
+            </div>
+            <p className="text-center text-xs text-gray-500 mt-4">Time zone auto-detected.</p>
+          </div>
+        )}
       </div>
     </section>
   );
