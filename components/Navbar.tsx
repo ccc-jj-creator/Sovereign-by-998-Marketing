@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+const TIDYCAL_URL = 'https://tidycal.com/3lgydj0/30-minute-meeting';
+
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +31,7 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-12">
-          {['Methodology', 'Pedigree', 'Audit'].map((item) => (
+          {['Methodology', 'Pedigree'].map((item) => (
             <button
               key={item}
               onClick={() => scrollTo(item.toLowerCase())}
@@ -38,12 +40,14 @@ const Navbar: React.FC = () => {
               {item}
             </button>
           ))}
-          <button
-            onClick={() => scrollTo('contact')}
+          <a
+            href={TIDYCAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-2 border border-white/20 text-xs font-medium tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all uppercase"
           >
             Apply Now
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -59,7 +63,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-wealth-black border-b border-white/10 p-6 flex flex-col space-y-6 md:hidden">
-           {['Methodology', 'Pedigree', 'Audit'].map((item) => (
+           {['Methodology', 'Pedigree'].map((item) => (
             <button
               key={item}
               onClick={() => scrollTo(item.toLowerCase())}
@@ -68,12 +72,14 @@ const Navbar: React.FC = () => {
               {item}
             </button>
           ))}
-          <button
-            onClick={() => scrollTo('contact')}
+          <a
+            href={TIDYCAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="block text-center py-3 border border-white/20 text-sm font-medium tracking-widest text-white hover:bg-white hover:text-black transition-all uppercase"
           >
             Apply Now
-          </button>
+          </a>
         </div>
       )}
     </nav>

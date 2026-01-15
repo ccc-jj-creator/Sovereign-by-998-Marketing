@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+const TIDYCAL_URL = 'https://tidycal.com/3lgydj0/30-minute-meeting';
+
 const Hero: React.FC = () => {
   const [offsetY, setOffsetY] = useState(0);
 
@@ -83,13 +85,15 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 animate-fade-in opacity-0 justify-center md:justify-start" style={{ animationDelay: '0.7s' }}>
-            <button 
-              onClick={() => scrollTo('contact')}
+            <a
+              href={TIDYCAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative px-10 py-5 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all duration-300 ease-out shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
             >
               <span className="relative z-10">Book Strategy Session</span>
               <div className="absolute inset-0 bg-white group-hover:scale-105 transition-transform duration-300"></div>
-            </button>
+            </a>
             
             <button 
               onClick={() => scrollTo('pedigree')}

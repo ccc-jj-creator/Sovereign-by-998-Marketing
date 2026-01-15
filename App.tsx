@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Philosophy from './components/Philosophy';
-import AIAudit from './components/AIAudit';
 import CostOfInaction from './components/CostOfInaction';
 import PedigreeMap from './components/PedigreeMap';
 import LiveTicker from './components/LiveTicker';
@@ -66,7 +65,6 @@ function App() {
       </section>
 
       <CostOfInaction />
-      <AIAudit />
       <Philosophy />
       <PedigreeMap />
       <ApplicationForm />
