@@ -13,17 +13,30 @@ const Navbar: React.FC = () => {
   }, []);
 
   const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+    if (window.location.hash === '#/privacy' || window.location.hash === '#/terms') {
+      window.location.hash = '';
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-wealth-black/95 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="text-2xl font-serif font-bold tracking-tighter text-white cursor-pointer select-none" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <div className="text-2xl font-serif font-bold tracking-tighter text-white cursor-pointer select-none" onClick={() => {
+          if (window.location.hash) window.location.hash = '';
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        }}>
           SOVEREIGN<span className="text-wealth-gold">.</span>
         </div>
 
@@ -39,10 +52,10 @@ const Navbar: React.FC = () => {
             </button>
           ))}
           <button
-            onClick={() => scrollTo('contact')}
+            onClick={() => scrollTo('apply')}
             className="px-6 py-2 border border-white/20 text-xs font-medium tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all uppercase"
           >
-            Apply Now
+            Get Offer
           </button>
         </div>
 
@@ -69,10 +82,10 @@ const Navbar: React.FC = () => {
             </button>
           ))}
           <button
-            onClick={() => scrollTo('contact')}
+            onClick={() => scrollTo('apply')}
             className="block text-center py-3 border border-white/20 text-sm font-medium tracking-widest text-white hover:bg-white hover:text-black transition-all uppercase"
           >
-            Apply Now
+            Get Offer
           </button>
         </div>
       )}

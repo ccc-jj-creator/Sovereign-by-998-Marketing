@@ -7,15 +7,15 @@ const PedigreeMap: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div className="max-w-2xl">
-                    <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">Institutional Reach.</h2>
+                    <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">National Buying Power.</h2>
                     <p className="text-gray-400 text-lg">
-                        We engineered the creative infrastructure for the industry's loudest voices. Now, we bring that same institutional standard to your private practice.
+                        We have the capital to buy properties across the country. Whether your home is in a major metro or a quiet suburb, we're ready to make a cash offer.
                     </p>
                 </div>
                 <div className="flex gap-4 text-xs font-bold tracking-[0.2em] text-gray-500 uppercase">
                     <div className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-wealth-gold rounded-full"></span>
-                        Active Systems
+                        Recent Purchases
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-gray-700 rounded-full"></span>
@@ -35,29 +35,30 @@ const PedigreeMap: React.FC = () => {
                 <div className="absolute top-[30%] left-[20%]"> {/* NY */}
                      <div className="w-3 h-3 bg-wealth-gold rounded-full animate-ping absolute"></div>
                      <div className="w-3 h-3 bg-wealth-gold rounded-full relative"></div>
-                     <div className="absolute top-4 left-4 text-[10px] text-white bg-black/80 px-2 py-1 border border-white/10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">New York: Active</div>
+                     <div className="absolute top-4 left-4 text-[10px] text-white bg-black/80 px-2 py-1 border border-white/10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">New York: Cash Purchase</div>
                 </div>
 
                 <div className="absolute top-[35%] left-[15%]"> {/* LA */}
                      <div className="w-2 h-2 bg-wealth-gold rounded-full animate-pulse absolute" style={{animationDelay: '1s'}}></div>
                      <div className="w-2 h-2 bg-wealth-gold rounded-full relative"></div>
+                     <div className="absolute top-4 left-4 text-[10px] text-white bg-black/80 px-2 py-1 border border-white/10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">California: Seller Finance</div>
                 </div>
 
-                <div className="absolute top-[25%] left-[48%]"> {/* London */}
+                <div className="absolute top-[25%] left-[48%]"> {/* London -> EU for demo, keep visual */}
                      <div className="w-3 h-3 bg-wealth-gold rounded-full animate-ping absolute" style={{animationDelay: '2s'}}></div>
                      <div className="w-3 h-3 bg-wealth-gold rounded-full relative"></div>
-                     <div className="absolute top-4 left-4 text-[10px] text-white bg-black/80 px-2 py-1 border border-white/10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">London: Active</div>
+                     <div className="absolute top-4 left-4 text-[10px] text-white bg-black/80 px-2 py-1 border border-white/10 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">Target Area</div>
                 </div>
 
-                <div className="absolute top-[40%] left-[80%]"> {/* Tokyo */}
+                <div className="absolute top-[40%] left-[80%]"> 
                      <div className="w-2 h-2 bg-white/50 rounded-full absolute"></div>
                 </div>
                 
-                <div className="absolute top-[70%] left-[85%]"> {/* Sydney */}
+                <div className="absolute top-[70%] left-[85%]"> 
                      <div className="w-2 h-2 bg-white/50 rounded-full absolute"></div>
                 </div>
                 
-                <div className="absolute top-[60%] left-[30%]"> {/* Brazil */}
+                <div className="absolute top-[60%] left-[30%]"> 
                      <div className="w-2 h-2 bg-white/50 rounded-full absolute"></div>
                 </div>
             </div>

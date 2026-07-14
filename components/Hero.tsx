@@ -65,37 +65,37 @@ const Hero: React.FC = () => {
           
           <div className="inline-flex items-center space-x-3 mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
             <div className="h-[1px] w-12 bg-wealth-gold shadow-[0_0_15px_#D4AF37]"></div>
-            <span className="text-wealth-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-shadow-gold">Sovereign Architecture</span>
+            <span className="text-wealth-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-shadow-gold">Sovereign Real Estate Partners</span>
           </div>
           
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif font-medium leading-[0.9] tracking-tighter text-white mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
-            WE SCALE <br />
+            WE BUY <br />
             <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-b from-white via-gray-200 to-gray-600 bg-clip-text text-transparent">PRACTICES.</span>
+                <span className="relative z-10 bg-gradient-to-b from-white via-gray-200 to-gray-600 bg-clip-text text-transparent">PROPERTIES.</span>
                 <span className="absolute -inset-1 bg-wealth-gold/10 blur-xl -z-10"></span>
             </span>
           </h1>
           
           <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
               <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mb-12 md:border-l-2 border-wealth-gold pl-6 mx-auto md:mx-0">
-                Stop chasing referrals. We install the <span className="text-white font-medium">Sovereign Client Acquisition System™</span> into your firm to predictably add <span className="text-wealth-gold">$10M-$50M in AUM</span> within 90 days.
+                Stop waiting months to sell. We provide <span className="text-white font-medium">all-cash offers, seller financing, and subject-to</span> real estate solutions. Close on your timeline, as-is, with <span className="text-wealth-gold">zero commissions.</span>
               </p>
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 animate-fade-in opacity-0 justify-center md:justify-start" style={{ animationDelay: '0.7s' }}>
             <button 
-              onClick={() => scrollTo('contact')}
+              onClick={() => scrollTo('apply')}
               className="relative px-10 py-5 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all duration-300 ease-out shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
             >
-              <span className="relative z-10">Book Strategy Session</span>
+              <span className="relative z-10">Get a Cash Offer</span>
               <div className="absolute inset-0 bg-white group-hover:scale-105 transition-transform duration-300"></div>
             </button>
             
             <button 
-              onClick={() => scrollTo('pedigree')}
+              onClick={() => scrollTo('methodology')}
               className="px-10 py-5 bg-transparent border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:border-wealth-gold/50 hover:bg-wealth-gold/5 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-3 group"
             >
-              View Market Pedigree
+              How It Works
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 text-wealth-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </button>
           </div>
