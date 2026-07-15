@@ -13,7 +13,7 @@ const TermsOfService: React.FC = () => {
 
         <section>
           <h2 className="text-xl font-bold text-white mt-8 mb-4">2. SMS Program Terms</h2>
-          <p>Sovereign Wealth Systems / 998 Marketing LLC sends SMS and MMS messages to individuals who have opted in to receive communications from us.</p>
+          <p>Sovereign 998 / 998 Marketing LLC sends SMS and MMS messages to individuals who have opted in to receive communications from us.</p>
           <ul className="list-disc pl-6 mt-4 space-y-2">
             <li><strong>Message Types:</strong> You may receive strategy-session confirmations, follow-ups, and marketing updates related to our real estate purchasing services.</li>
             <li><strong>Message Frequency:</strong> Up to 4 messages per month. Message frequency varies if a conversation ensues.</li>
@@ -27,18 +27,18 @@ const TermsOfService: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-white mt-8 mb-4">3. Use of Services</h2>
-          <p>You agree to use our services only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the website.</p>
+          <h2 className="text-xl font-bold text-white mt-8 mb-4">3. Use of Services & Property Transactions</h2>
+          <p>You agree to use our services only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the website. Our services include evaluating, making offers on, and purchasing real estate properties directly from homeowners. Any offers made are subject to final contract signing and due diligence.</p>
         </section>
         
         <section>
           <h2 className="text-xl font-bold text-white mt-8 mb-4">4. Contact Information</h2>
           <p>If you have any questions about these Terms, please contact us at:</p>
           <div className="mt-4 p-4 bg-wealth-charcoal border border-white/10 rounded">
-            <p className="font-bold text-white">998 Marketing LLC (dba Sovereign Wealth Systems)</p>
-            <p>1017 Plain Street, Newark, NY 14513</p>
+            <p className="font-bold text-white">998 Marketing LLC (dba Sovereign 998)</p>
+            <p>1017 Plain Street, Newark, NY 14513, US</p>
             <p>Phone: +19394008306</p>
-            <p>Email: alex@998marketing.com</p>
+            <p>Email: prebay.inc@gmail.com</p>
           </div>
         </section>
       </div>

@@ -285,14 +285,13 @@ const ApplicationForm: React.FC = () => {
                     </div>
                     
                     <div>
-                        <label className="block text-xs font-bold tracking-[0.1em] text-gray-400 uppercase mb-2">Phone</label>
+                        <label className="block text-xs font-bold tracking-[0.1em] text-gray-400 uppercase mb-2">Phone (Optional)</label>
                         <input 
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
                             className="w-full bg-wealth-charcoal border border-white/10 text-white p-4 focus:border-wealth-gold outline-none rounded-none transition-colors"
-                            required
                             placeholder="(555) 123-4567"
                         />
                     </div>
@@ -300,7 +299,7 @@ const ApplicationForm: React.FC = () => {
                     <div className="flex items-start space-x-3 pt-2">
                         <input type="checkbox" name="consent" onChange={handleInputChange} checked={formData.consent} className="mt-1 bg-wealth-charcoal border-white/20 accent-wealth-gold" />
                         <p className="text-[10px] text-gray-500 leading-tight">
-                            By checking this box, I consent to receive marketing and informational text messages from Sovereign Wealth Systems (998 Marketing LLC) at the number provided. Up to 4 msgs/mo. Msg frequency varies if a conversation ensues. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. <a href="#/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> &amp; <a href="#/terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Terms of Service</a>
+                            By checking this box, I agree to receive recurring automated marketing text messages from Sovereign 998 at the phone number provided. Up to 4 msgs/mo. Message frequency varies if a conversation ensues. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for assistance. Consent is not a condition of purchase. <a href="#/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a>, <a href="#/terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Terms of Service</a> &amp; <a href="#/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>
                         </p>
                     </div>
 
@@ -314,7 +313,7 @@ const ApplicationForm: React.FC = () => {
                         </button>
                         <button 
                             type="submit"
-                            disabled={!formData.first_name || !formData.last_name || !formData.email || !formData.phone || isSubmitting}
+                            disabled={!formData.first_name || !formData.last_name || !formData.email || isSubmitting}
                             className="px-8 py-3 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto flex justify-center items-center gap-2"
                         >
                             {isSubmitting ? 'Submitting...' : 'Get Cash Offer'}

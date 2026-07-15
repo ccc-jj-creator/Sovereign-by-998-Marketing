@@ -9,12 +9,13 @@ const Footer: React.FC = () => {
                 <div className="flex space-x-8 mt-4 md:mt-0">
                     <a href="#/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
                     <a href="#/terms" className="hover:text-white transition-colors">Terms of Service</a>
-                    <a href="#" className="hover:text-white transition-colors">Earnings Disclaimer</a>
+                    <a href="#/sms-terms" className="hover:text-white transition-colors">SMS Terms</a>
+                    <a href="#/contact" className="hover:text-white transition-colors">Contact</a>
                 </div>
             </div>
             <div className="text-xs text-gray-700">
-                <p className="font-bold mb-1 text-gray-600">998 Marketing LLC</p>
-                <p>1017 Plain Street, Newark, NY 14513 | +19394008306 | alex@998marketing.com</p>
+                <p className="font-bold mb-1 text-gray-600">998 Marketing LLC (dba Sovereign 998)</p>
+                <p>1017 Plain Street, Newark, NY 14513, US | +19394008306 | prebay.inc@gmail.com</p>
             </div>
         </div>
     </footer>

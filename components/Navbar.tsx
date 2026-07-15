@@ -42,6 +42,9 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-12">
+          <div className="text-gray-300 text-sm font-medium border-r border-white/20 pr-8">
+             <a href="tel:+19394008306" className="hover:text-white transition-colors">+1 (939) 400-8306</a>
+          </div>
           {['Methodology', 'Pedigree', 'Audit'].map((item) => (
             <button
               key={item}
@@ -72,6 +75,9 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-wealth-black border-b border-white/10 p-6 flex flex-col space-y-6 md:hidden">
+          <div className="border-b border-white/10 pb-4 mb-2">
+             <a href="tel:+19394008306" className="block text-center text-gray-300 text-lg hover:text-white transition-colors">+1 (939) 400-8306</a>
+          </div>
            {['Methodology', 'Pedigree', 'Audit'].map((item) => (
             <button
               key={item}

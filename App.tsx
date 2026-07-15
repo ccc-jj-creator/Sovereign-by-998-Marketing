@@ -10,6 +10,8 @@ import ApplicationForm from './components/ApplicationForm';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import Contact from './components/Contact';
+import SMSTerms from './components/SMSTerms';
 
 function App() {
   const [currentRoute, setCurrentRoute] = useState(window.location.hash);
@@ -29,6 +31,10 @@ function App() {
       return <PrivacyPolicy />;
     } else if (currentRoute === '#/terms') {
       return <TermsOfService />;
+    } else if (currentRoute === '#/contact') {
+      return <Contact />;
+    } else if (currentRoute === '#/sms-terms') {
+      return <SMSTerms />;
     }
 
     return (
