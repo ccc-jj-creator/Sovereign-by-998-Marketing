@@ -223,15 +223,10 @@ const ApplicationForm: React.FC = () => {
                     </div>
 
                     <div className="flex items-start space-x-3 pt-2">
-                        <input type="checkbox" name="consent" onChange={handleInputChange} checked={formData.consent} className="mt-1 bg-wealth-charcoal border-white/20 accent-wealth-gold" />
-                        <div>
-                            <p className="text-[10px] text-gray-400 leading-tight mb-1">
-                                By checking this box, I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998) regarding my property inquiry and related real estate services.
-                            </p>
-                            <p className="text-[10px] text-gray-500 leading-tight">
-                                Message frequency: up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for assistance. View our <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
-                            </p>
-                        </div>
+                        <input type="checkbox" id="consent" name="consent" onChange={handleInputChange} checked={formData.consent} className="mt-1 bg-wealth-charcoal border-white/20 accent-wealth-gold" />
+                        <label htmlFor="consent" className="text-[10px] text-gray-400 leading-tight cursor-pointer">
+                            By checking this box, I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998). Message frequency: up to 4 messages per month. Message &amp; data rates may apply. Reply STOP to opt out. Reply HELP for assistance. View our <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
+                        </label>
                     </div>
 
                     <div className="pt-6">
