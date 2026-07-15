@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ApplicationForm: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     // Step 1: Property Details
     property_address: '',
@@ -33,20 +33,6 @@ const ApplicationForm: React.FC = () => {
     }));
   };
 
-  const nextStep = () => {
-    if (step === 1) {
-        if (!formData.property_address || !formData.property_condition || !formData.timeline) return;
-    }
-    if (step === 2) {
-        if (!formData.reason || !formData.occupancy) return;
-    }
-    setStep(prev => prev + 1);
-  };
-
-  const prevStep = () => {
-      setStep(prev => prev - 1);
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -73,29 +59,9 @@ const ApplicationForm: React.FC = () => {
     
     setTimeout(() => {
         setIsSubmitting(false);
-        setStep(4); // Move to Calendar
+        setIsSuccess(true); // Move to Calendar
     }, 2000);
   };
-
-  const renderProgressBar = () => (
-      <div className="flex items-center justify-between mb-8 relative px-4">
-          <div className="absolute top-[14px] left-0 w-full h-[1px] bg-white/10 -z-10"></div>
-          {[1, 2, 3].map((s) => (
-              <div key={s} className="flex flex-col items-center group">
-                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mb-2 transition-all duration-300 ${step >= s ? 'bg-wealth-gold border-wealth-gold text-black' : 'bg-wealth-black border-gray-700 text-gray-500'}`}>
-                      {step > s ? (
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                      ) : (
-                          <span className="text-xs font-bold">{s}</span>
-                      )}
-                  </div>
-                  <span className={`text-[10px] uppercase tracking-widest font-bold transition-colors ${step >= s ? 'text-wealth-gold' : 'text-gray-600'}`}>
-                      {s === 1 ? 'Property' : s === 2 ? 'Details' : 'Contact'}
-                  </span>
-              </div>
-          ))}
-      </div>
-  );
 
   return (
     <section id="apply" className="py-32 px-6 text-center">
@@ -113,14 +79,11 @@ const ApplicationForm: React.FC = () => {
       </div>
 
       <div className="max-w-2xl mx-auto relative z-20 text-left">
-        {step < 4 ? (
+        {!isSuccess ? (
           <form onSubmit={handleSubmit} className="bg-wealth-black/50 p-6 md:p-10 border border-white/10 backdrop-blur-md shadow-2xl relative">
             
-            {renderProgressBar()}
-
-            {/* --- STEP 1: PROPERTY DETAILS --- */}
-            {step === 1 && (
-                <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 animate-fade-in">
+                {/* --- PROPERTY DETAILS --- */}
                     <div>
                         <label className="block text-xs font-bold tracking-[0.1em] text-gray-400 uppercase mb-2">Property Address</label>
                         <input 
@@ -169,23 +132,8 @@ const ApplicationForm: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="pt-4 flex justify-end">
-                        <button 
-                            type="button"
-                            onClick={nextStep}
-                            disabled={!formData.property_address || !formData.property_condition || !formData.timeline}
-                            className="px-8 py-3 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Continue
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* --- STEP 2: MOTIVATION --- */}
-            {step === 2 && (
-                <div className="space-y-6 animate-fade-in">
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* --- MOTIVATION --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
                         <div>
                             <label className="block text-xs font-bold tracking-[0.1em] text-gray-400 uppercase mb-2">Reason for Selling</label>
                             <select 
@@ -221,30 +169,8 @@ const ApplicationForm: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="pt-4 flex justify-between">
-                         <button 
-                            type="button"
-                            onClick={prevStep}
-                            className="text-gray-500 text-xs font-bold tracking-[0.2em] uppercase hover:text-white transition-colors"
-                        >
-                            Back
-                        </button>
-                        <button 
-                            type="button"
-                            onClick={nextStep}
-                            disabled={!formData.reason || !formData.occupancy}
-                            className="px-8 py-3 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Continue
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* --- STEP 3: IDENTITY --- */}
-            {step === 3 && (
-                <div className="space-y-6 animate-fade-in">
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* --- IDENTITY --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
                         <div>
                             <label className="block text-xs font-bold tracking-[0.1em] text-gray-400 uppercase mb-2">First Name</label>
                             <input 
@@ -298,32 +224,29 @@ const ApplicationForm: React.FC = () => {
 
                     <div className="flex items-start space-x-3 pt-2">
                         <input type="checkbox" name="consent" onChange={handleInputChange} checked={formData.consent} className="mt-1 bg-wealth-charcoal border-white/20 accent-wealth-gold" />
-                        <p className="text-[10px] text-gray-500 leading-tight">
-                            By checking this box, I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998) regarding my property inquiry. Up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out. Reply HELP for assistance. See our <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
-                        </p>
+                        <div>
+                            <p className="text-[10px] text-gray-400 leading-tight mb-1">
+                                By checking this box, I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998) regarding my property inquiry and related real estate services.
+                            </p>
+                            <p className="text-[10px] text-gray-500 leading-tight">
+                                Message frequency: up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for assistance. View our <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="pt-4 flex justify-between">
-                         <button 
-                            type="button"
-                            onClick={prevStep}
-                            className="text-gray-500 text-xs font-bold tracking-[0.2em] uppercase hover:text-white transition-colors"
-                        >
-                            Back
-                        </button>
+                    <div className="pt-6">
                         <button 
                             type="submit"
-                            disabled={!formData.first_name || !formData.last_name || !formData.email || isSubmitting}
-                            className="px-8 py-3 bg-white text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto flex justify-center items-center gap-2"
+                            disabled={!formData.property_address || !formData.property_condition || !formData.timeline || !formData.reason || !formData.occupancy || !formData.first_name || !formData.last_name || !formData.email || isSubmitting}
+                            className="px-8 py-4 bg-white text-black text-sm font-bold tracking-[0.2em] uppercase hover:bg-wealth-gold hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full flex justify-center items-center gap-2"
                         >
                             {isSubmitting ? 'Submitting...' : 'Get Cash Offer'}
                         </button>
                     </div>
                 </div>
-            )}
           </form>
         ) : (
-            /* --- STEP 4: SUCCESS / CALENDAR --- */
+            /* --- SUCCESS / CALENDAR --- */
             <div className="bg-wealth-black border border-white/10 p-4 animate-fade-in min-h-[600px] flex flex-col">
                 <div className="text-center py-6 border-b border-white/10">
                     <div className="text-wealth-gold mb-2">
