@@ -14,26 +14,46 @@ import Contact from './components/Contact';
 import SMSTerms from './components/SMSTerms';
 
 function App() {
-  const [currentRoute, setCurrentRoute] = useState(window.location.hash);
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    const path = window.location.pathname;
+    if (path === '/privacy' || path === '/terms' || path === '/contact' || path === '/sms-terms') {
+      return path;
+    }
+    return window.location.hash;
+  });
 
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentRoute(window.location.hash);
       window.scrollTo(0, 0);
     };
+    
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path === '/privacy' || path === '/terms' || path === '/contact' || path === '/sms-terms') {
+        setCurrentRoute(path);
+      } else {
+        setCurrentRoute(window.location.hash);
+      }
+      window.scrollTo(0, 0);
+    };
 
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   const renderContent = () => {
-    if (currentRoute === '#/privacy') {
+    if (currentRoute === '#/privacy' || currentRoute === '/privacy') {
       return <PrivacyPolicy />;
-    } else if (currentRoute === '#/terms') {
+    } else if (currentRoute === '#/terms' || currentRoute === '/terms') {
       return <TermsOfService />;
-    } else if (currentRoute === '#/contact') {
+    } else if (currentRoute === '#/contact' || currentRoute === '/contact') {
       return <Contact />;
-    } else if (currentRoute === '#/sms-terms') {
+    } else if (currentRoute === '#/sms-terms' || currentRoute === '/sms-terms') {
       return <SMSTerms />;
     }
 

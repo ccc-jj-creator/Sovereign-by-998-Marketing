@@ -39,7 +39,7 @@ const SMSTerms: React.FC = () => {
 
         <section>
           <h2 className="text-xl font-bold text-white mt-8 mb-4">Privacy</h2>
-          <p>Your privacy is important to us. Your mobile information and consent will not be shared with third parties or affiliates for marketing or promotional purposes. For more information, please read our full <a href="#/privacy" className="text-wealth-gold hover:underline">Privacy Policy</a>.</p>
+          <p>Your privacy is important to us. Your mobile information and consent will not be shared with third parties or affiliates for marketing or promotional purposes. For more information, please read our full <a href="/privacy" className="text-wealth-gold hover:underline">Privacy Policy</a>.</p>
         </section>
       </div>
     </div>

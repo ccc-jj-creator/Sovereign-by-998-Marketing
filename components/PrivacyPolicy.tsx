@@ -28,7 +28,7 @@ const PrivacyPolicy: React.FC = () => {
 
         <section>
           <h2 className="text-xl font-bold text-white mt-8 mb-4">4. SMS Communications & Opt-In Data</h2>
-          <p>If you have provided your phone number and opted in to receive SMS messages, you can opt out at any time by replying <strong>STOP</strong>. For assistance, reply <strong>HELP</strong>. Please refer to our full <a href="#/sms-terms" className="text-wealth-gold hover:underline">SMS Terms</a> for more details.</p>
+          <p>If you have provided your phone number and opted in to receive SMS messages, you can opt out at any time by replying <strong>STOP</strong>. For assistance, reply <strong>HELP</strong>. Please refer to our full <a href="/sms-terms" className="text-wealth-gold hover:underline">SMS Terms</a> for more details.</p>
           <p className="mt-2">Your mobile information and consent to receive SMS will <strong>never</strong> be shared with third parties or affiliates for marketing or promotional purposes. We respect your privacy and adhere strictly to A2P 10DLC guidelines.</p>
         </section>
 

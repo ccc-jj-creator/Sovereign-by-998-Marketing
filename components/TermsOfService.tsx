@@ -23,7 +23,7 @@ const TermsOfService: React.FC = () => {
             <li><strong>Carrier Liability:</strong> Carriers are not liable for delayed or undelivered messages.</li>
             <li><strong>Consent:</strong> Consent to receive text messages is not a condition of any purchase or service.</li>
           </ul>
-          <p className="mt-4">For more information on how we handle your data, please review our <a href="#/privacy" className="text-wealth-gold hover:underline">Privacy Policy</a>.</p>
+          <p className="mt-4">For more information on how we handle your data, please review our <a href="/privacy" className="text-wealth-gold hover:underline">Privacy Policy</a>.</p>
         </section>
 
         <section>
