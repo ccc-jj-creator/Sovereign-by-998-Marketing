@@ -299,7 +299,7 @@ const ApplicationForm: React.FC = () => {
                     <div className="flex items-start space-x-3 pt-2">
                         <input type="checkbox" name="consent" onChange={handleInputChange} checked={formData.consent} className="mt-1 bg-wealth-charcoal border-white/20 accent-wealth-gold" />
                         <p className="text-[10px] text-gray-500 leading-tight">
-                            I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998) regarding my property inquiry. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="https://sovereign998.app/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="https://sovereign998.app/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
+                            By checking this box, I agree to receive recurring automated SMS messages from 998 Marketing LLC (dba Sovereign 998) regarding my property inquiry. Up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out. Reply HELP for assistance. See our <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">Privacy Policy</a> and <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="text-wealth-gold hover:underline">SMS Terms</a>.
                         </p>
                     </div>
 
